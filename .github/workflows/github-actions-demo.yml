@@ -21,11 +21,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Run Tests
+        run: ./gradlew check
+
       - name: Run Kover
         run: ./gradlew koverVerify
 
-      - name: Upload Coverage to CodeCov
-        uses: codecov/codecov-action@v2
-        with:
-          files: ./build/reports/kover/xmlReport.xml
-          fail_ci_if_error: true
