@@ -22,7 +22,7 @@ jobs:
         run: ./gradlew build
 
       - name: Run Kover
-        run: ./gradlew koverReport
+        run: ./gradlew koverVerify
 
       - name: Upload Coverage to CodeCov
         uses: codecov/codecov-action@v2
