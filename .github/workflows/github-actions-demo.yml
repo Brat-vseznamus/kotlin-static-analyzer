@@ -27,3 +27,6 @@ jobs:
       - name: Run Kover
         run: ./gradlew koverVerify
 
+      - name: Run Linter
+        run: ./gradlew ktlintKotlinScriptCheck
+
