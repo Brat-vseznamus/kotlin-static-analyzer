@@ -31,10 +31,10 @@ fun main() {
                 val names = it.findSubTree(namePath)
                 if (names.isNotEmpty()) {
                     val nameNode = names[0] as DefaultAstTerminal
-                    val position = (nameNode.attachments.attachments.values as Collection<AstInfo>).toList()[0]
+                    val position = (nameNode.attachments.attachments.values).toList()[0]
 
                     val isId = codeRule.check(it)
-                    if (isId) {
+                    if (isId && position is AstInfo) {
                         candidates.add(FunctionInfo(nameNode.text, curFile.absolutePath, position))
                     }
                 }
@@ -51,4 +51,3 @@ fun main() {
         )
     }
 }
-
