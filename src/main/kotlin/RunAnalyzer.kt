@@ -52,6 +52,3 @@ fun main() {
     }
 }
 
-fun id(x: Int): Int {
-    return x
-}
