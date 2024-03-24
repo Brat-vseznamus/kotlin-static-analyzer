@@ -44,9 +44,10 @@ fun main() {
     if (candidates.isEmpty()) {
         println("Everything is okay!")
     } else {
-        throw Error(candidates
-            .map { "${it.path}: function \"${it.name}\" on position ${it.position.start} similar to identical function" }
-            .joinToString(separator = "\n") { it }
+        throw Error(
+            candidates
+                .map { "${it.path}:${it.position.start}: function \"${it.name}\" is similar to identical function" }
+                .joinToString(separator = "\n") { it },
         )
     }
 }
