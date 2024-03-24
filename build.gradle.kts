@@ -11,6 +11,10 @@ plugins {
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
+application {
+    mainClass = "RunAnalyzerKt"
+}
+
 repositories {
     mavenCentral()
     maven("https://jitpack.io")
@@ -25,6 +29,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(17)
 }
@@ -33,9 +38,9 @@ koverReport {
     filters {
         excludes {
             classes("com.baeldung.code.not.covered")
+            classes("*RunAnalyzer*")
         }
     }
-
     verify {
         rule {
             isEnabled = true

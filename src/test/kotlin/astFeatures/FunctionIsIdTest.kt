@@ -10,25 +10,25 @@ import org.junit.jupiter.api.Test
 class FunctionIsIdTest {
     @Test
     fun checkIdFunction() {
-        assertTrue(init(ID_PATH) == 1)
+        assertTrue(initTestEnv(ID_PATH) == 1)
     }
 
     @Test
     fun checkNonIdFunction() {
-        assertTrue(init(NON_ID_PATH) == 0)
+        assertTrue(initTestEnv(NON_ID_PATH) == 0)
     }
 
     @Test
     fun checkNonIdBySizeFunction() {
-        assertTrue(init(NON_ID_BY_SIZE_PATH) == 0)
+        assertTrue(initTestEnv(NON_ID_BY_SIZE_PATH) == 0)
     }
 
     @Test
     fun checkNonIdSinceReturnNonParamFunction() {
-        assertTrue(init(NON_ID_RETURNS_NON_PARAM_PATH) == 0)
+        assertTrue(initTestEnv(NON_ID_RETURNS_NON_PARAM_PATH) == 0)
     }
 
-    fun init(path: String): Int {
+    private fun initTestEnv(path: String): Int {
         val source = AstSource.File(path)
         val kotlinFile = KotlinGrammarAntlrKotlinParser.parseKotlinFile(source)
         val codeRule: CodeRule = FunctionIsId()

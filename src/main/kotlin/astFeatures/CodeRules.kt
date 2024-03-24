@@ -28,8 +28,10 @@ class FunctionIsId : CodeRule {
             return false
         }
         val paramName = paramNames.last()
+        var hasStatements = false
 
         node.findByDescription("statement").forEach { statement ->
+            hasStatements = true
             val exprs = statement.findByDescription("expression")
             exprs.forEach { expr ->
                 expr.findByDescription("jumpExpression").forEach {
@@ -52,6 +54,6 @@ class FunctionIsId : CodeRule {
                 }
             }
         }
-        return true
+        return hasStatements
     }
 }
