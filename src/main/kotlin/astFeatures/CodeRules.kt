@@ -8,7 +8,7 @@ interface CodeRule {
     fun check(node: Ast): Boolean
 }
 
-class FunctionIsId: CodeRule {
+class FunctionIsId : CodeRule {
     override fun check(node: Ast): Boolean {
         if (node.description != "functionDeclaration") {
             return false
@@ -54,5 +54,4 @@ class FunctionIsId: CodeRule {
         }
         return true
     }
-
 }

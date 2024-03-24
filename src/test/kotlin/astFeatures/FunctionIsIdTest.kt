@@ -4,12 +4,10 @@ import kotlinx.ast.common.AstSource
 import kotlinx.ast.common.ast.AstInfo
 import kotlinx.ast.common.ast.DefaultAstTerminal
 import kotlinx.ast.grammar.kotlin.target.antlr.kotlin.KotlinGrammarAntlrKotlinParser
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
-
 class FunctionIsIdTest {
-
     @Test
     fun checkIdFunction() {
         assertTrue(init(ID_PATH) == 1)
@@ -29,7 +27,6 @@ class FunctionIsIdTest {
     fun checkNonIdSinceReturnNonParamFunction() {
         assertTrue(init(NON_ID_RETURNS_NON_PARAM_PATH) == 0)
     }
-
 
     fun init(path: String): Int {
         val source = AstSource.File(path)
