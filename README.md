@@ -1,54 +1,49 @@
 
-Это простой анализатор кода, которому по имени файла на языке Kotlin (путь указывается в переменной _source_)
-сообщает о наличии в нем функций напоминающий функцию id (то есть ничего не делающие методы)
+# Описание
+Это простой анализатор кода, который при запуске проверяет наличие в проекте о наличии в нем функций напоминающий функцию id (то есть ничего не делающие методы)
 
 Мотивация: не хочется, чтобы разработчики писали такие функции и вызывали их, так как это лишние инструкции, замедляющие код
 и ничего не привносящие в его работу. 
 
-**Пример работы**:
+## Пример работы
 
-Файл, который хотим проверить:
+Пусть в проекте есть файл вида:
 
 ```kotlin
-package examples
-
-fun notId(a: Int): Int {
-    if (a == 2) {
-        return a
-    } else {
-        return 4
-    }
-}
-
-fun <T> id2(a: T): T {
-    while (true) {
-        return a
-    }
-}
-
-fun strangeId(i: Int): Int {
-    if (i != 0) {
-        when (i) {
-            3 -> return i
-            1 -> return i
-            2 -> {
-                println(i)
-                return i
-            }
-        }
-    }
-    return i
+fun idMaybe(x: Int): Int {
+    return x
 }
 ```
 
-В этом коде 2 функции по факту ничего не делающие (кроме как выводят значение переменной на входе)
-Хотелось бы их убрать.
-
-Запускаем _src/main/kotlin/Main.kt_ с указанием пути до этого файла (в примере _src/main/kotlin/examples/Id.kt_)
+Запускаем анализатор и получаем следующий вывод:
 
 Вывод программы:
 ```text
-function "id2" on position 10:9 is similar to id
-function "strangeId" on position 16:5 is similar to id
+Run analyzer for /path-to-project/.!
+Exception in thread "main" java.lang.Error: 
+/path-to-project/./src/main/kotlin/RunAnalyzer.kt:1:5: function "idMaybe" is similar to identical function
+        at RunAnalyzerKt.main(RunAnalyzer.kt:47)
+        at RunAnalyzerKt.main(RunAnalyzer.kt)
+
 ```
 
+## Как запустить:
+Из этого репозитория запускаем:
+```bash
+./gradlew distZip
+```
+
+Далее запускаем:
+```bash
+unzip build/distributions/kotlin-static-analyzer-1.0-SNAPSHOT.zip
+```
+
+Получаем папку _kotlin-static-analyzer-1.0-SNAPSHOT_. 
+В ней лежат исходники для запуска по пути: _kotlin-static-analyzer-1.0-SNAPSHOT/bin/_
+
+Пример:
+```bash
+./kotlin-static-analyzer-1.0-SNAPSHOT/bin/kotlin-static-analyzer
+Run analyzer for /path-to-project/.!
+Everything is okay!
+```
